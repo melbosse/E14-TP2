@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,22 +23,23 @@ public class TicTacToe implements ActionListener {
     // Affichage du jeu de Tic Tac Toe
     TicTacToe() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500,500);
-        frame.getContentPane().setBackground(Color.darkGray);
+        frame.setSize(500, 500);
+        frame.getContentPane().setBackground(Color.white);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        lblTicTacToe.setFont(new Font("Arial",Font.BOLD, 50));
-        lblTicTacToe.setBackground(Color.black);
-        lblTicTacToe.setForeground(Color.white);
+        lblTicTacToe.setFont(new Font("Arial", Font.BOLD, 50));
         lblTicTacToe.setHorizontalAlignment(JLabel.CENTER);
+        lblTicTacToe.setForeground(Color.white);
         lblTicTacToe.setText("Tic Tac Toe");
+
+        titrePanel.setBackground(Color.black);
 
         boutonPanel.setLayout(new GridLayout(3, 3));
         boutonPanel.setBackground(Color.white);
 
-        for(int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {
             boutons[i] = new JButton();
             boutonPanel.add(boutons[i]);
             boutons[i].setFont(new Font("Arial", Font.BOLD, 100));
@@ -49,7 +49,7 @@ public class TicTacToe implements ActionListener {
         }
 
         titrePanel.add(lblTicTacToe);
-        frame.add(titrePanel,BorderLayout.NORTH);
+        frame.add(titrePanel, BorderLayout.NORTH);
         frame.add(boutonPanel);
 
         frame.add(boutonRecommencer, BorderLayout.SOUTH);
@@ -67,10 +67,10 @@ public class TicTacToe implements ActionListener {
 
                 int confirmation = JOptionPane.showConfirmDialog(frame, "Voulez-vous vraiment recommencer ?", "Tic Tac Toe", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-                if(confirmation == JOptionPane.NO_OPTION){
+                if (confirmation == JOptionPane.NO_OPTION) {
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 } else {
-                    for(int i = 0; i < 9; i++) {
+                    for (int i = 0; i < 9; i++) {
                         boutons[i].setText("");
                         boutons[i].setFont(new Font("Arial", Font.BOLD, 100));
                         boutons[i].setBackground(Color.white);
@@ -85,11 +85,11 @@ public class TicTacToe implements ActionListener {
     // Permet de déterminer le tour du joueur
     @Override
     public void actionPerformed(ActionEvent e) {
-        for(int i = 0; i < 9; i++) {
-            if(e.getSource() == boutons[i]) {
-                if(tourJoueur) {
-                    if(boutons[i].getText().equals("")){
-                        boutons[i].setForeground(new Color(0,0,0));
+        for (int i = 0; i < 9; i++) {
+            if (e.getSource() == boutons[i]) {
+                if (tourJoueur) {
+                    if (boutons[i].getText().equals("")) {
+                        boutons[i].setForeground(new Color(0, 0, 0));
                         boutons[i].setText("O");
                         tourJoueur = false;
                         lblTicTacToe.setText("Tour du joueur O");
@@ -109,91 +109,92 @@ public class TicTacToe implements ActionListener {
     }
 
     // Vérification du gagnant
-    public void verification(){
+    public void verification() {
         // Pour le joueur X
         // Lignes diagonales
-        if((boutons[0].getText().equals("X")) && (boutons[1].getText().equals("X")) && (boutons[2].getText().equals("X"))) {
-            gagnantX(0,1,2);
-        }
-        else if((boutons[3].getText().equals("X")) && (boutons[4].getText().equals("X")) && (boutons[5].getText().equals("X"))) {
-            gagnantX(3,4,5);
-        }
-        else if((boutons[6].getText().equals("X")) && (boutons[7].getText().equals("X")) && (boutons[8].getText().equals("X"))) {
-            gagnantX(6,7,8);
+        if ((boutons[0].getText().equals("X")) && (boutons[1].getText().equals("X")) && (boutons[2].getText().equals("X"))) {
+            gagnantX(0, 1, 2);
+        } else if ((boutons[3].getText().equals("X")) && (boutons[4].getText().equals("X")) && (boutons[5].getText().equals("X"))) {
+            gagnantX(3, 4, 5);
+        } else if ((boutons[6].getText().equals("X")) && (boutons[7].getText().equals("X")) && (boutons[8].getText().equals("X"))) {
+            gagnantX(6, 7, 8);
         }
         // Lignes verticales
-        else if((boutons[0].getText().equals("X")) && (boutons[3].getText().equals("X")) && (boutons[6].getText().equals("X"))) {
-            gagnantX(0,3,6);
-        }
-        else if((boutons[1].getText().equals("X")) && (boutons[4].getText().equals("X")) && (boutons[7].getText().equals("X"))) {
-            gagnantX(1,4,7);
-        }
-        else if((boutons[2].getText().equals("X")) && (boutons[5].getText().equals("X")) && (boutons[8].getText().equals("X"))) {
-            gagnantX(2,5,8);
+        else if ((boutons[0].getText().equals("X")) && (boutons[3].getText().equals("X")) && (boutons[6].getText().equals("X"))) {
+            gagnantX(0, 3, 6);
+        } else if ((boutons[1].getText().equals("X")) && (boutons[4].getText().equals("X")) && (boutons[7].getText().equals("X"))) {
+            gagnantX(1, 4, 7);
+        } else if ((boutons[2].getText().equals("X")) && (boutons[5].getText().equals("X")) && (boutons[8].getText().equals("X"))) {
+            gagnantX(2, 5, 8);
         }
         // Lignes diagonales
-        else if((boutons[0].getText().equals("X")) && (boutons[4].getText().equals("X")) && (boutons[8].getText().equals("X"))) {
-            gagnantX(0,4,8);
-        }
-        else if((boutons[2].getText().equals("X")) && (boutons[4].getText().equals("X")) && (boutons[6].getText().equals("X"))) {
-            gagnantX(2,4,6);
+        else if ((boutons[0].getText().equals("X")) && (boutons[4].getText().equals("X")) && (boutons[8].getText().equals("X"))) {
+            gagnantX(0, 4, 8);
+        } else if ((boutons[2].getText().equals("X")) && (boutons[4].getText().equals("X")) && (boutons[6].getText().equals("X"))) {
+            gagnantX(2, 4, 6);
         }
         // Pour le joueur O
         // Lignes horizontales
-        else if((boutons[0].getText().equals("O")) && (boutons[1].getText().equals("O")) && (boutons[2].getText().equals("O"))) {
-            gagnantO(0,1,2);
-        }
-        else if((boutons[3].getText().equals("O")) && (boutons[4].getText().equals("O")) && (boutons[5].getText().equals("O"))) {
-            gagnantO(3,4,5);
-        }
-        else if((boutons[6].getText().equals("O")) && (boutons[7].getText().equals("O")) && (boutons[8].getText().equals("O"))) {
-            gagnantO(6,7,8);
+        else if ((boutons[0].getText().equals("O")) && (boutons[1].getText().equals("O")) && (boutons[2].getText().equals("O"))) {
+            gagnantO(0, 1, 2);
+        } else if ((boutons[3].getText().equals("O")) && (boutons[4].getText().equals("O")) && (boutons[5].getText().equals("O"))) {
+            gagnantO(3, 4, 5);
+        } else if ((boutons[6].getText().equals("O")) && (boutons[7].getText().equals("O")) && (boutons[8].getText().equals("O"))) {
+            gagnantO(6, 7, 8);
         }
         // Lignes verticales
-        else if((boutons[0].getText().equals("O")) && (boutons[3].getText().equals("O")) && (boutons[6].getText().equals("O"))) {
-            gagnantO(0,3,6);
-        }
-        else if((boutons[1].getText().equals("O")) && (boutons[4].getText().equals("O")) && (boutons[7].getText().equals("O"))) {
-            gagnantO(1,4,7);
-        }
-        else if((boutons[2].getText().equals("O")) && (boutons[5].getText().equals("O")) && (boutons[8].getText().equals("O"))) {
-            gagnantO(2,5,8);
+        else if ((boutons[0].getText().equals("O")) && (boutons[3].getText().equals("O")) && (boutons[6].getText().equals("O"))) {
+            gagnantO(0, 3, 6);
+        } else if ((boutons[1].getText().equals("O")) && (boutons[4].getText().equals("O")) && (boutons[7].getText().equals("O"))) {
+            gagnantO(1, 4, 7);
+        } else if ((boutons[2].getText().equals("O")) && (boutons[5].getText().equals("O")) && (boutons[8].getText().equals("O"))) {
+            gagnantO(2, 5, 8);
         }
         // Lignes diagonales
-        else if((boutons[0].getText().equals("O")) && (boutons[4].getText().equals("O")) && (boutons[8].getText().equals("O"))) {
-            gagnantO(0,4,8);
+        else if ((boutons[0].getText().equals("O")) && (boutons[4].getText().equals("O")) && (boutons[8].getText().equals("O"))) {
+            gagnantO(0, 4, 8);
+        } else if ((boutons[2].getText().equals("O")) && (boutons[4].getText().equals("O")) && (boutons[6].getText().equals("O"))) {
+            gagnantO(2, 4, 6);
         }
-        else if((boutons[2].getText().equals("O")) && (boutons[4].getText().equals("O")) && (boutons[6].getText().equals("O"))) {
-            gagnantO(2,4,6);
-        }
-//        else{
-//            JOptionPane.showMessageDialog(frame, "La partie est nulle.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+        // Partie nulle
+//        else if(){
+//            partieNulle();
 //        }
     }
 
     // Affichage du joueur gagnant
     public void gagnantX(int a, int b, int c) {
-        boutons[a].setBackground(Color.GREEN);
-        boutons[b].setBackground(Color.GREEN);
-        boutons[c].setBackground(Color.GREEN);
+        boutons[a].setBackground(Color.green);
+        boutons[b].setBackground(Color.green);
+        boutons[c].setBackground(Color.green);
 
-        for(int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {
             boutons[i].setEnabled(false);
         }
         // Affiche un message de victoire au joueur X
         JOptionPane.showMessageDialog(frame, "Le joueur " + joueur1.getNom() + " est gagnant!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
-//        JOptionPane.showMessageDialog(frame, "Joueur X est gagnant!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+        lblTicTacToe.setText("Tic Tac Toe");
     }
-    public void gagnantO(int a, int b, int c) {
-        boutons[a].setBackground(Color.GREEN);
-        boutons[b].setBackground(Color.GREEN);
-        boutons[c].setBackground(Color.GREEN);
 
-        for(int i = 0; i < 9; i++) {
+    public void gagnantO(int a, int b, int c) {
+        boutons[a].setBackground(Color.green);
+        boutons[b].setBackground(Color.green);
+        boutons[c].setBackground(Color.green);
+
+        for (int i = 0; i < 9; i++) {
             boutons[i].setEnabled(false);
         }
         // Affiche un message de victoire au joueur O
         JOptionPane.showMessageDialog(frame, "Le joueur " + joueur2.getNom() + " est gagnant!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
-//        JOptionPane.showMessageDialog(frame, "Joueur O est gagnant!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+        lblTicTacToe.setText("Tic Tac Toe");
+    }
+
+    public void partieNulle(){
+        for (int i = 0; i < 9; i++) {
+            boutons[i].setEnabled(false);
+        }
+        // Affiche un message aux joueurs
+        JOptionPane.showMessageDialog(frame, "La partie est nulle.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+        lblTicTacToe.setText("Tic Tac Toe");
     }
 }
