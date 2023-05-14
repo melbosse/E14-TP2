@@ -26,6 +26,7 @@ public class TicTacToe implements ActionListener {
         frame.setSize(500, 500);
         frame.getContentPane().setBackground(Color.white);
         frame.setLayout(new BorderLayout());
+        frame.setTitle("Tic Tac Toe");
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
