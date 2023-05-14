@@ -14,10 +14,10 @@ public class TicTacToe implements ActionListener {
 
     // Question à l'utilisateur (prénoms des joueurs)
     String prenomJoueur1 = JOptionPane.showInputDialog(null,
-            "Entrez le nom du premier joueur :");
+            "Entrez le prénom du premier joueur :");
     Joueur joueur1 = new Joueur(prenomJoueur1);
     String prenomJoueur2 = JOptionPane.showInputDialog(null,
-            "Entrez le nom du deuxième joueur :");
+            "Entrez le prénom du deuxième joueur :");
     Joueur joueur2 = new Joueur(prenomJoueur2);
 
     // Affichage du jeu de Tic Tac Toe
@@ -61,22 +61,19 @@ public class TicTacToe implements ActionListener {
         boutonRecommencer.addActionListener(this);
 
         // Bouton de confirmation pour recommencer
-        boutonRecommencer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        boutonRecommencer.addActionListener(e -> {
 
-                int confirmation = JOptionPane.showConfirmDialog(frame, "Voulez-vous vraiment recommencer ?", "Tic Tac Toe", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int confirmation = JOptionPane.showConfirmDialog(frame, "Voulez-vous vraiment recommencer ?", "Tic Tac Toe", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-                if (confirmation == JOptionPane.NO_OPTION) {
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                } else {
-                    for (int i = 0; i < 9; i++) {
-                        boutons[i].setText("");
-                        boutons[i].setFont(new Font("Arial", Font.BOLD, 100));
-                        boutons[i].setBackground(Color.white);
-                        boutons[i].setFocusable(false);
-                        boutons[i].setEnabled(true);
-                    }
+            if (confirmation == JOptionPane.NO_OPTION) {
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            } else {
+                for (int i = 0; i < 9; i++) {
+                    boutons[i].setText("");
+                    boutons[i].setFont(new Font("Arial", Font.BOLD, 100));
+                    boutons[i].setBackground(Color.white);
+                    boutons[i].setFocusable(false);
+                    boutons[i].setEnabled(true);
                 }
             }
         });
@@ -156,10 +153,6 @@ public class TicTacToe implements ActionListener {
         } else if ((boutons[2].getText().equals("O")) && (boutons[4].getText().equals("O")) && (boutons[6].getText().equals("O"))) {
             gagnantO(2, 4, 6);
         }
-        // Partie nulle
-//        else if(){
-//            partieNulle();
-//        }
     }
 
     // Affichage du joueur gagnant
@@ -186,15 +179,6 @@ public class TicTacToe implements ActionListener {
         }
         // Affiche un message de victoire au joueur O
         JOptionPane.showMessageDialog(frame, "Le joueur " + joueur2.getNom() + " est gagnant!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
-        lblTicTacToe.setText("Tic Tac Toe");
-    }
-
-    public void partieNulle(){
-        for (int i = 0; i < 9; i++) {
-            boutons[i].setEnabled(false);
-        }
-        // Affiche un message aux joueurs
-        JOptionPane.showMessageDialog(frame, "La partie est nulle.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
         lblTicTacToe.setText("Tic Tac Toe");
     }
 }
